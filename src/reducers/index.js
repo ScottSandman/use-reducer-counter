@@ -7,7 +7,14 @@ import {
   ALLOW_INCREMENT_BY_N,
 } from "../actions";
 
-export const reducer = (state, action) => {
+export const reducer = (
+  state = {
+    counter: 0,
+    n: 0,
+    allowed: true,
+  },
+  action
+) => {
   switch (action.type) {
     case INCREMENT_COUNTER:
       return { ...state, counter: state.counter + 1 };
