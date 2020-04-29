@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div>{store.getState().counter}</div>
+        <div>{store.getState().incrementers.counter}</div>
         <button onClick={() => store.dispatch(incrementCounter())}>
           increment
         </button>
@@ -32,13 +32,13 @@ function App() {
           <br />
           <button
             onClick={() => store.dispatch(incrementByN())}
-            disabled={!store.getState().allowed}
+            disabled={!store.getState().allowers.allowed}
           >
             increment by n
           </button>
           <button
             onClick={() => store.dispatch(decrementByN())}
-            disabled={!store.getState().allowed}
+            disabled={!store.getState().allowers.allowed}
           >
             decrement by n
           </button>
