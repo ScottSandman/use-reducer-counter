@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React from "react";
 import "./App.css";
 import {
   incrementCounter,
@@ -9,45 +9,43 @@ import {
   allowIncrementByN,
 } from "./actions";
 import { reducer } from "./reducers";
-
-const initialState = {
-  counter: 0,
-  n: 0,
-  allowed: true,
-};
+import { CreateStore } from "./store";
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state);
+  const store = CreateStore(reducer);
   return (
     <div className="App">
       <header className="App-header">
-        <div>{state.counter}</div>
-        <button onClick={() => dispatch(incrementCounter())}>increment</button>
-        <button onClick={() => dispatch(decrementCounter())}>decrement</button>
+        <div>{store.getState().counter}</div>
+        <button onClick={() => store.dispatch(incrementCounter())}>
+          increment
+        </button>
+        <button onClick={() => store.dispatch(decrementCounter())}>
+          decrement
+        </button>
         <div>
           <input
             onChange={(e) => {
-              dispatch(updateN(Number(e.target.value)));
+              store.dispatch(updateN(Number(e.target.value)));
             }}
           />
           <br />
           <button
-            onClick={() => dispatch(incrementByN())}
-            disabled={!state.allowed}
+            onClick={() => store.dispatch(incrementByN())}
+            disabled={!store.getState().allowed}
           >
             increment by n
           </button>
           <button
-            onClick={() => dispatch(decrementByN())}
-            disabled={!state.allowed}
+            onClick={() => store.dispatch(decrementByN())}
+            disabled={!store.getState().allowed}
           >
             decrement by n
           </button>
           <br />
           <input
             type="checkbox"
-            onChange={() => dispatch(allowIncrementByN())}
+            onChange={() => store.dispatch(allowIncrementByN())}
           />
         </div>
       </header>
